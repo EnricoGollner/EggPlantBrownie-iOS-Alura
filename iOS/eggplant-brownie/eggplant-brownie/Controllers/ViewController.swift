@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var refTableViewController: RefeicoesTableViewController?
+    
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet var felicidadeTextField: UITextField?
     
@@ -31,8 +33,11 @@ class ViewController: UIViewController {
         }
         
         if let felicidade = Int(felicidadeRef){
-            let ref = Refeicao(nome: nomeRef, felicidade: felicidade)
-            print("Comi \(ref.nome) e fiquei com felicidade: \(ref.felicidade)")
+            let newRef = Refeicao(nome: nomeRef, felicidade: felicidade)
+            
+            refTableViewController?.add(newRef)
+            
+            navigationController?.popViewController(animated: true)  // Volta à tela anterior
         }
     }
     

@@ -15,6 +15,7 @@
 		2A15C80729B5C0B400481227 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A15C80529B5C0B400481227 /* LaunchScreen.storyboard */; };
 		2A64A0D629B97A8700BC5893 /* Refeicao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A64A0D529B97A8700BC5893 /* Refeicao.swift */; };
 		2A64A0DA29B97B1500BC5893 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A64A0D929B97B1500BC5893 /* Item.swift */; };
+		2A924C3229BD9D620050A330 /* RefeicoesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A924C3129BD9D620050A330 /* RefeicoesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2A15C80829B5C0B400481227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A64A0D529B97A8700BC5893 /* Refeicao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refeicao.swift; sourceTree = "<group>"; };
 		2A64A0D929B97B1500BC5893 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		2A924C3129BD9D620050A330 /* RefeicoesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefeicoesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				2A15C7FE29B5C0B300481227 /* ViewController.swift */,
+				2A924C3129BD9D620050A330 /* RefeicoesTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				2A64A0DA29B97B1500BC5893 /* Item.swift in Sources */,
 				2A15C7FF29B5C0B300481227 /* ViewController.swift in Sources */,
 				2A15C7FB29B5C0B300481227 /* AppDelegate.swift in Sources */,
+				2A924C3229BD9D620050A330 /* RefeicoesTableViewController.swift in Sources */,
 				2A15C7FD29B5C0B300481227 /* SceneDelegate.swift in Sources */,
 				2A64A0D629B97A8700BC5893 /* Refeicao.swift in Sources */,
 			);
