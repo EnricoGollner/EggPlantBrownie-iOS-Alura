@@ -15,22 +15,25 @@ class RefeicoesTableViewController: UITableViewController {
         Refeicao(nome: "Burguers", felicidade: 5)
     ]
     
+    // Retornando número de linhas para a tabela:
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return refeicoes.count
     }
     
+    // Definindo o conteúdo:
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let refNow = refeicoes[indexPath.row]
-        
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         
+        let refDaVezNoLoop = refeicoes[indexPath.row]
+        
         var content = cell.defaultContentConfiguration()
-        content.text = refNow.nome
+        content.text = refDaVezNoLoop.nome
         
         cell.contentConfiguration = content
         
         return cell
     }
+    
     
     func add(_ refeicao: Refeicao) {
         refeicoes.append(refeicao)
@@ -39,8 +42,10 @@ class RefeicoesTableViewController: UITableViewController {
     
     // Dando acesso ao ViewController:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewControllerAccessed = segue.destination as? ViewController{
-            viewControllerAccessed.refTableViewController = self  // Preenchemos a instância dessa classe, encontrada no arquivo "ViewController"
+        if segue.identifier == "adicionar" {
+            if let viewControllerClassAccessed = segue.destination as? ViewController{
+                viewControllerClassAccessed.refTableViewController = self
+            }
         }
     }
     
