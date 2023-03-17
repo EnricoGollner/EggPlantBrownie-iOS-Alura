@@ -7,7 +7,11 @@
 
 import UIKit
 
-class RefeicoesTableViewController: UITableViewController {
+protocol AdicionaRefeicaoDelegate{
+    func add(_ refeicao: Refeicao)
+}
+
+class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDelegate {
     
     var refeicoes = [
         Refeicao(nome: "Macarrão", felicidade: 4),
@@ -22,18 +26,17 @@ class RefeicoesTableViewController: UITableViewController {
     
     // Definindo o conteúdo:
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = UITableViewCell()
         
-        let refDaVezNoLoop = refeicoes[indexPath.row]
+        let refDaVez = refeicoes[indexPath.row]
         
         var content = cell.defaultContentConfiguration()
-        content.text = refDaVezNoLoop.nome
+        content.text = refDaVez.nome
         
         cell.contentConfiguration = content
         
         return cell
     }
-    
     
     func add(_ refeicao: Refeicao) {
         refeicoes.append(refeicao)
@@ -44,7 +47,7 @@ class RefeicoesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "adicionar" {
             if let viewControllerClassAccessed = segue.destination as? ViewController{
-                viewControllerClassAccessed.refTableViewController = self
+                viewControllerClassAccessed.delegate? = self
             }
         }
     }

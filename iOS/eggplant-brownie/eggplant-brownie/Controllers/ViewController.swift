@@ -7,12 +7,54 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var refTableViewController: RefeicoesTableViewController?
+    // MARK: - Atributos
+    var delegate: AdicionaRefeicaoDelegate?
+    
+    var itens = [
+        "Molho de tomate",
+        "Queijo",
+        "Molho apimentado",
+        "Manjericão"
+    ]
+    
+    
+    // MARK: - IBOutlets
     
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet var felicidadeTextField: UITextField?
+    
+    // MARK: - UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return itens.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        
+        let itemDaVez = itens[indexPath.row]
+        
+        var content = cell.defaultContentConfiguration()
+        content.text = itemDaVez
+        cell.contentConfiguration = content
+        
+        return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        
+        if cell.accessoryType == .none{
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+    }
+    
+    // MARK: - IBActions
     
     @IBAction func adicionar(){
         
@@ -35,7 +77,7 @@ class ViewController: UIViewController {
         if let felicidade = Int(felicidadeRef){
             let newRef = Refeicao(nome: nomeRef, felicidade: felicidade)
             
-            refTableViewController?.add(newRef)
+            delegate?.add(newRef)
             
             navigationController?.popViewController(animated: true)  // Volta à tela anterior
         }
