@@ -12,13 +12,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - Atributos
     var delegate: AdicionaRefeicaoDelegate?
     
-    var itens = [
-        "Molho de tomate",
-        "Queijo",
-        "Molho apimentado",
-        "Manjericão"
+    var itens: [Item] = [
+        Item(nome: "Molho de tomate", calorias: 40),
+        Item(nome: "Queijo", calorias: 40),
+        Item(nome: "Manjericão", calorias: 40),
+        Item(nome: "Molho de pimenta", calorias: 40)
     ]
     
+    var itensSelecionados: [Item] = []
     
     // MARK: - IBOutlets
     
@@ -31,56 +32,51 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = UITableViewCell()
         
-        let itemDaVez = itens[indexPath.row]
+        let itemDavez = itens[indexPath.row]
         
         var content = cell.defaultContentConfiguration()
-        content.text = itemDaVez
+        content.text = itemDavez.nome
         cell.contentConfiguration = content
         
         return cell
     }
     
     // MARK: - UITableViewDelegate
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
         if cell.accessoryType == .none{
+            let linhaDaTabela = indexPath.row
+            itensSelecionados.append(itens[linhaDaTabela])
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
+            
+            let item = itens[indexPath.row]
+            if let position = itensSelecionados.firstIndex(of: item){
+                itensSelecionados.remove(at: position)
+            }
         }
     }
+    
     
     // MARK: - IBActions
     
     @IBAction func adicionar(){
-        
-//        if let nomeRef = nomeTextField?.text, let felicidadeRef = felicidadeTextField?.text{
-//            let nome = nomeRef
-//            if let felicidade = Int(felicidadeRef){
-//                let refeicao = Refeicao(nome: nome, felicidade: felicidade)
-//
-//                print("Comi \(nomeRef) e fiquei com felicidade: \(felicidade)")
-//            }
-//        } else{
-//            print("Erro ao tentar criar a refeição.")
-//        }
         
         guard let nomeRef = nomeTextField?.text, let felicidadeRef = felicidadeTextField?.text else{
             print("Erro ao tentar criar refeição")
             return
         }
         
-        if let felicidade = Int(felicidadeRef){
-            let newRef = Refeicao(nome: nomeRef, felicidade: felicidade)
-            
-            delegate?.add(newRef)
-            
-            navigationController?.popViewController(animated: true)  // Volta à tela anterior
-        }
+        guard let felicidade = Int(felicidadeRef) else { return }
+        
+        let newRef = Refeicao(nome: nomeRef, felicidade: felicidade, itens: itensSelecionados)
+        
+        delegate?.add(newRef)
+        navigationController?.popViewController(animated: true)
     }
     
 }

@@ -54,8 +54,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="iM0-WE-GY5"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Oqv-mW-sLD"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="7lo-yU-t8S"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="pLa-IO-dpi"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPn-Of-dZn">
