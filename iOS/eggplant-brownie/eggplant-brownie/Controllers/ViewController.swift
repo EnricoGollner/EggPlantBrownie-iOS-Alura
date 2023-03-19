@@ -26,6 +26,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet var felicidadeTextField: UITextField?
     
+    // MARK: View life cycle:
+    
+    override func viewDidLoad() {
+        let botaoAddItem = UIBarButtonItem(title: "Adicionar", style: .plain, target: self, action: #selector(adicionarItens))
+        
+        navigationItem.rightBarButtonItem = botaoAddItem
+    }
+    
+    @objc func adicionarItens() {
+        let adicionarItensViewController = AdicionarItensViewController()
+        navigationController?.pushViewController(adicionarItensViewController, animated: true)
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itens.count
@@ -47,17 +60,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
-        if cell.accessoryType == .none{
-            let linhaDaTabela = indexPath.row
+        if cell.accessoryType == .none {
+            let linhaDaTabela = indexPath.row  // Int
             itensSelecionados.append(itens[linhaDaTabela])
             cell.accessoryType = .checkmark
         } else {
-            cell.accessoryType = .none
-            
-            let item = itens[indexPath.row]
-            if let position = itensSelecionados.firstIndex(of: item){
+            let itemClicado = itens[indexPath.row]
+            if let position = itensSelecionados.firstIndex(of: itemClicado){  // Se encontrou o item clicado nos selecionados, retorna a posição do mesmo
                 itensSelecionados.remove(at: position)
             }
+            cell.accessoryType = .none
         }
     }
     
