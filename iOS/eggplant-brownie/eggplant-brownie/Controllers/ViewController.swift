@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AdicionarItemDelegate {
     
     // MARK: - Atributos
     var delegate: AdicionaRefeicaoDelegate?
@@ -26,6 +26,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet var felicidadeTextField: UITextField?
     
+    @IBOutlet weak var itensTableView: UITableView!
+    
+    
     // MARK: View life cycle:
     
     override func viewDidLoad() {
@@ -35,11 +38,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc func adicionarItens() {
-        let adicionarItensViewController = AdicionarItensViewController()
+        let adicionarItensViewController = AdicionarItensViewController(delegate: self)  // Passamos a classe ViewController para o atributo delegate, que só conforma com o protocolo AdicionarItemDelegate, por tanto, só podemos acessar o método "add" com ele
         navigationController?.pushViewController(adicionarItensViewController, animated: true)
     }
     
+    func add(_ item: Item){
+        itens.append(item)
+        itensTableView.reloadData()
+    }
+    
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itens.count
     }
@@ -57,6 +66,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         

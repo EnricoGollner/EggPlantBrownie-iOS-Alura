@@ -7,22 +7,46 @@
 
 import UIKit
 
-class AdicionarItensViewController: UIViewController {
+protocol AdicionarItemDelegate {
+    func add(_ item: Item)
+}
 
+class AdicionarItensViewController: UIViewController {
+    
+    // MARK: - Atributos:
+    
+    var delegate: AdicionarItemDelegate?
+    
+    init(delegate: AdicionarItemDelegate?) {
+        super.init(nibName: "AdicionarItensViewController", bundle: nil)  // nibName é o nome da view que está conectada a esse viewController
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    // MARK: - IBOutlets:
+    
+    @IBOutlet weak var nomeTextField: UITextField!
+    @IBOutlet weak var caloriasTextField: UITextField!
     
     // MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - IBAction
     
     @IBAction func adicionarItem(_ sender: Any) {
-        // Navegar próxima
+        guard let nome = nomeTextField.text, let calorias = caloriasTextField.text else { return }
         
-        navigationController?.popViewController(animated: true)
+        if let numCalorias = Double(calorias) {
+            let newItem = Item(nome: nome, calorias: numCalorias)
+            delegate?.add(newItem)
+            navigationController?.popViewController(animated: true)
+        }
     }
     
 }
