@@ -64,7 +64,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Adicionar"/>
                                 <connections>
-                                    <action selector="adicionar" destination="BYZ-38-t0r" eventType="touchUpInside" id="fhR-yk-CTj"/>
+                                    <action selector="adicionar" destination="BYZ-38-t0r" eventType="touchUpInside" id="i8k-c1-vwd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -108,7 +108,7 @@
                     <navigationItem key="navigationItem" id="oF3-df-l61">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="rz5-Mx-s5T">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" identifier="adicionar" id="ahL-DG-3me"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="adicionar" id="ZvM-f7-xju"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

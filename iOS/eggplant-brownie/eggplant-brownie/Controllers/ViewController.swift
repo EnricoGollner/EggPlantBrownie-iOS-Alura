@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AdicionarItemDelegate {
     
     // MARK: - Atributos
+    
     var delegate: AdicionaRefeicaoDelegate?
     
     var itens: [Item] = [
@@ -27,7 +28,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var felicidadeTextField: UITextField?
     
     @IBOutlet weak var itensTableView: UITableView!
-    
     
     // MARK: View life cycle:
     
@@ -87,7 +87,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - IBActions
     
     @IBAction func adicionar(){
-        
         guard let nomeRef = nomeTextField?.text, let felicidadeRef = felicidadeTextField?.text else{
             print("Erro ao tentar criar refeição")
             return
@@ -97,9 +96,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let newRef = Refeicao(nome: nomeRef, felicidade: felicidade, itens: itensSelecionados)
         
+        
         delegate?.add(newRef)
         navigationController?.popViewController(animated: true)
     }
-    
 }
 

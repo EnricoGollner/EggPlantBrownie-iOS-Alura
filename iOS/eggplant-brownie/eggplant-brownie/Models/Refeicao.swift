@@ -27,4 +27,15 @@ class Refeicao{
         
         return total
     }
+    
+    func detalhes() -> String {
+        var message = "Felicidade: \(felicidade)"
+        
+        for item in itens {
+            message += "\n\(item.nome) - Calorias: \(item.calorias)"
+        }
+        
+        return message
+    }
+    
 }

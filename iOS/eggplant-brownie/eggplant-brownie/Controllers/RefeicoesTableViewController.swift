@@ -32,8 +32,10 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
         
         var content = cell.defaultContentConfiguration()
         content.text = refDaVez.nome
-        
         cell.contentConfiguration = content
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(mostrarDetalhes(_ :)))
+        cell.addGestureRecognizer(longPress)
         
         return cell
     }
@@ -43,11 +45,27 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
         tableView.reloadData()
     }
     
+    @objc func mostrarDetalhes(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            let cell = gesture.view as! UITableViewCell
+            guard let indexPath = tableView.indexPath(for: cell) else { return }
+            let refeicaoClicada = refeicoes[indexPath.row]
+            
+            let alertController = UIAlertController(title: refeicaoClicada.nome, message: refeicaoClicada.detalhes(), preferredStyle: .alert)
+            
+            let botaoCancelar = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(botaoCancelar)
+            
+            present(alertController, animated: true)
+            
+        }
+    }
+    
     // Dando acesso ao ViewController:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "adicionar" {
-            if let viewControllerClassAccessed = segue.destination as? ViewController{
-                viewControllerClassAccessed.delegate? = self
+            if let viewControllerAccessed = segue.destination as? ViewController{
+                viewControllerAccessed.delegate = self
             }
         }
     }
