@@ -57,14 +57,13 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
             alertController.addAction(botaoCancelar)
             
             present(alertController, animated: true)
-            
         }
     }
     
     // Dando acesso ao ViewController:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "adicionar" {
-            if let viewControllerAccessed = segue.destination as? ViewController{
+        if segue.identifier == "adicionarRefeicao" {
+            if let viewControllerAccessed = segue.destination as? ViewController {
                 viewControllerAccessed.delegate = self
             }
         }

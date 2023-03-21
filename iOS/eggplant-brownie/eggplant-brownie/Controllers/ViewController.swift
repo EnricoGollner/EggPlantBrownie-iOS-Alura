@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet var felicidadeTextField: UITextField?
     
-    @IBOutlet weak var itensTableView: UITableView!
+    @IBOutlet weak var itensTableView: UITableView?
     
     // MARK: View life cycle:
     
@@ -44,7 +44,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func add(_ item: Item){
         itens.append(item)
-        itensTableView.reloadData()
+        
+        if let tableView = itensTableView {
+            tableView.reloadData()
+        } else {
+            let alerta = UIAlertController(title: "Desculpe", message: "não foi possível atualizar a tabela", preferredStyle: .alert)
+            let btOk = UIAlertAction(title: "Ok", style: .cancel)
+            alerta.addAction(btOk)
+            
+            present(alerta, animated: true)
+        }
     }
     
     // MARK: - UITableViewDataSource
@@ -87,15 +96,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - IBActions
     
     @IBAction func adicionar(){
-        guard let nomeRef = nomeTextField?.text, let felicidadeRef = felicidadeTextField?.text else{
-            print("Erro ao tentar criar refeição")
-            return
-        }
+        guard let nomeRef = nomeTextField?.text, let felicidadeRef = felicidadeTextField?.text else { return }
         
         guard let felicidade = Int(felicidadeRef) else { return }
         
         let newRef = Refeicao(nome: nomeRef, felicidade: felicidade, itens: itensSelecionados)
-        
         
         delegate?.add(newRef)
         navigationController?.popViewController(animated: true)
