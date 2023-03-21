@@ -18,6 +18,7 @@
 		2A64A0D629B97A8700BC5893 /* Refeicao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A64A0D529B97A8700BC5893 /* Refeicao.swift */; };
 		2A64A0DA29B97B1500BC5893 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A64A0D929B97B1500BC5893 /* Item.swift */; };
 		2A924C3229BD9D620050A330 /* RefeicoesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A924C3129BD9D620050A330 /* RefeicoesTableViewController.swift */; };
+		2A9B79EB29CA64F100BF6D50 /* Alerta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9B79EA29CA64F100BF6D50 /* Alerta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		2A64A0D529B97A8700BC5893 /* Refeicao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refeicao.swift; sourceTree = "<group>"; };
 		2A64A0D929B97B1500BC5893 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		2A924C3129BD9D620050A330 /* RefeicoesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefeicoesTableViewController.swift; sourceTree = "<group>"; };
+		2A9B79EA29CA64F100BF6D50 /* Alerta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			children = (
 				2A64A0D529B97A8700BC5893 /* Refeicao.swift */,
 				2A64A0D929B97B1500BC5893 /* Item.swift */,
+				2A9B79EA29CA64F100BF6D50 /* Alerta.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A9B79EB29CA64F100BF6D50 /* Alerta.swift in Sources */,
 				2A64A0DA29B97B1500BC5893 /* Item.swift in Sources */,
 				2A15C7FF29B5C0B300481227 /* ViewController.swift in Sources */,
 				2A5288C229C6E53D006CE11E /* AdicionarItensViewController.swift in Sources */,
