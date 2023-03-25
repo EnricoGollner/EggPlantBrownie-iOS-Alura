@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let tableView = itensTableView {
             tableView.reloadData()
         } else {
-            Alerta(controller: self).exibe()
+            Alerta(controller: self).exibe(titulo: "Desculpe", mensagem: "Não foi possível atualizar a tabela")
         }
     }
     
@@ -88,18 +88,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    func recuperaRefeicaoDoFormulario() -> Refeicao? {
+        guard let nomeRef = nomeTextField?.text else {
+            return nil
+        }
+        
+        guard let felicidadeRef = felicidadeTextField?.text, let felicidade = Int(felicidadeRef) else {
+            return nil
+        }
+        
+        let newRef = Refeicao(nome: nomeRef, felicidade: felicidade, itens: itensSelecionados)
+        return newRef
+    }
+    
     
     // MARK: - IBActions
     
     @IBAction func adicionar(){
-        guard let nomeRef = nomeTextField?.text, let felicidadeRef = felicidadeTextField?.text else { return }
-        
-        guard let felicidade = Int(felicidadeRef) else { return }
-        
-        let newRef = Refeicao(nome: nomeRef, felicidade: felicidade, itens: itensSelecionados)
-        
-        delegate?.add(newRef)
-        navigationController?.popViewController(animated: true)
+        if let newRef = recuperaRefeicaoDoFormulario() {
+            delegate?.add(newRef)
+            navigationController?.popViewController(animated: true)
+        } else {
+            Alerta(controller: self).exibe(mensagem: "Erro ao ler dados do formulário.")
+        }
     }
 }
 
