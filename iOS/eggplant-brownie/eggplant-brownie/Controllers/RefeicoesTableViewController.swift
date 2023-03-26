@@ -19,6 +19,27 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
         Refeicao(nome: "Burguers", felicidade: 5)
     ]
     
+    override func viewDidLoad() {
+        guard let caminho = recuperaCaminho() else { return }
+        
+        do {
+            let dados = try Data(contentsOf: caminho)
+            guard let refeicoesSalvas = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(dados) as? [Refeicao] else { return }
+            
+            refeicoes = refeicoesSalvas
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func recuperaCaminho() -> URL? {
+        guard let diretorio = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        let caminho = diretorio.appending(path: "refeicao")
+        
+        return caminho
+    }
+    
     // Retornando número de linhas para a tabela:
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return refeicoes.count
@@ -43,20 +64,29 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
     func add(_ refeicao: Refeicao) {
         refeicoes.append(refeicao)
         tableView.reloadData()
+        
+        guard let caminho = recuperaCaminho() else { return }
+        do {
+            let dados = try NSKeyedArchiver.archivedData(withRootObject: refeicoes, requiringSecureCoding: false)
+            
+            try dados.write(to: caminho)
+        } catch {
+            print("Erro: \(error.localizedDescription)")
+        }
+        
+        
     }
     
     @objc func mostrarDetalhes(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
             let cell = gesture.view as! UITableViewCell
             guard let indexPath = tableView.indexPath(for: cell) else { return }
-            let refeicaoClicada = refeicoes[indexPath.row]
+            let refeicaoTouched = refeicoes[indexPath.row]
             
-            let alertController = UIAlertController(title: refeicaoClicada.nome, message: refeicaoClicada.detalhes(), preferredStyle: .alert)
-            
-            let botaoCancelar = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-            alertController.addAction(botaoCancelar)
-            
-            present(alertController, animated: true)
+            RemoveRefeicaoViewController(controller: self).exibe(refeicaoTouched, handler: { alert in
+                self.refeicoes.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            })
         }
     }
     
