@@ -13,12 +13,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var delegate: AdicionaRefeicaoDelegate?
     
-    var itens: [Item] = [
-        Item(nome: "Molho de tomate", calorias: 40),
-        Item(nome: "Queijo", calorias: 40),
-        Item(nome: "Manjericão", calorias: 40),
-        Item(nome: "Molho de pimenta", calorias: 40)
-    ]
+    var itens: [Item] = []
     
     var itensSelecionados: [Item] = []
     
@@ -33,20 +28,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         let botaoAddItem = UIBarButtonItem(title: "Adicionar", style: .plain, target: self, action: #selector(adicionarItens))
-        
         navigationItem.rightBarButtonItem = botaoAddItem
-        
-        do {
-            guard let diretorio = recuperaDiretorio() else { return }
-            
-            let dados = try Data(contentsOf: diretorio)
-            
-            guard let itensSalvos = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(dados) as? [Item] else { return }
-            
-            itens = itensSalvos
-        } catch {
-            
-        }
+        recuperaItens()
+    }
+    
+    func recuperaItens() {
+        itens = ItemDao().recupera()
     }
     
     @objc func adicionarItens() {
@@ -56,21 +43,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func add(_ item: Item){
         itens.append(item)
+        ItemDao().save(itens)
         if let tableView = itensTableView {
             tableView.reloadData()
         } else {
             Alerta(controller: self).exibe(titulo: "Desculpe", mensagem: "Não foi possível atualizar a tabela")
         }
-        
-        do {
-            let dados = try NSKeyedArchiver.archivedData(withRootObject: itens, requiringSecureCoding: false)
-            guard let caminho = recuperaDiretorio() else { return }
-            try dados.write(to: caminho)
-            
-        } catch {
-            print(error.localizedDescription)
-        }
-        
     }
     
     func recuperaDiretorio() ->  URL? {

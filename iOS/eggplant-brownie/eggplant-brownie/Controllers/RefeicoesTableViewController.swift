@@ -13,31 +13,10 @@ protocol AdicionaRefeicaoDelegate{
 
 class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDelegate {
     
-    var refeicoes = [
-        Refeicao(nome: "Macarrão", felicidade: 4),
-        Refeicao(nome: "Pizza", felicidade: 5),
-        Refeicao(nome: "Burguers", felicidade: 5)
-    ]
+    var refeicoes: [Refeicao] = []
     
     override func viewDidLoad() {
-        guard let caminho = recuperaCaminho() else { return }
-        
-        do {
-            let dados = try Data(contentsOf: caminho)
-            guard let refeicoesSalvas = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(dados) as? [Refeicao] else { return }
-            
-            refeicoes = refeicoesSalvas
-            
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func recuperaCaminho() -> URL? {
-        guard let diretorio = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
-        let caminho = diretorio.appending(path: "refeicao")
-        
-        return caminho
+        refeicoes = RefeicaoDao().recupera()
     }
     
     // Retornando número de linhas para a tabela:
@@ -65,16 +44,7 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
         refeicoes.append(refeicao)
         tableView.reloadData()
         
-        guard let caminho = recuperaCaminho() else { return }
-        do {
-            let dados = try NSKeyedArchiver.archivedData(withRootObject: refeicoes, requiringSecureCoding: false)
-            
-            try dados.write(to: caminho)
-        } catch {
-            print("Erro: \(error.localizedDescription)")
-        }
-        
-        
+        RefeicaoDao().save(refeicoes)
     }
     
     @objc func mostrarDetalhes(_ gesture: UILongPressGestureRecognizer) {
@@ -86,6 +56,8 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoDeleg
             RemoveRefeicaoViewController(controller: self).exibe(refeicaoTouched, handler: { alert in
                 self.refeicoes.remove(at: indexPath.row)
                 self.tableView.reloadData()
+                
+                RefeicaoDao().save(self.refeicoes)
             })
         }
     }

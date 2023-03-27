@@ -23,7 +23,6 @@ class Refeicao: NSObject, NSCoding {
     
     // MARK: - NSCoding:
     
-    
     func encode(with coder: NSCoder) {
         coder.encode(nome, forKey: "nome")
         coder.encode(felicidade, forKey: "felicidade")

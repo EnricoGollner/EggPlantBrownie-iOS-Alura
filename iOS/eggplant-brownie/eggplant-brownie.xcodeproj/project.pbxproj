@@ -20,11 +20,13 @@
 		2A64A0DA29B97B1500BC5893 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A64A0D929B97B1500BC5893 /* Item.swift */; };
 		2A924C3229BD9D620050A330 /* RefeicoesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A924C3129BD9D620050A330 /* RefeicoesTableViewController.swift */; };
 		2A9B79EB29CA64F100BF6D50 /* Alerta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9B79EA29CA64F100BF6D50 /* Alerta.swift */; };
+		2ABDB49229D148E600571203 /* RefeicaoDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABDB49129D148E600571203 /* RefeicaoDao.swift */; };
+		2AC7C25E29D14E4B008DB4FC /* ItemDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7C25D29D14E4B008DB4FC /* ItemDao.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2A15C7F729B5C0B300481227 /* eggplant-brownie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eggplant-brownie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A15C7FA29B5C0B300481227 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2A15C7FA29B5C0B300481227 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; tabWidth = 3; };
 		2A15C7FC29B5C0B300481227 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2A15C7FE29B5C0B300481227 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2A15C80129B5C0B300481227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -38,6 +40,8 @@
 		2A64A0D929B97B1500BC5893 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		2A924C3129BD9D620050A330 /* RefeicoesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefeicoesTableViewController.swift; sourceTree = "<group>"; tabWidth = 5; };
 		2A9B79EA29CA64F100BF6D50 /* Alerta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerta.swift; sourceTree = "<group>"; };
+		2ABDB49129D148E600571203 /* RefeicaoDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefeicaoDao.swift; sourceTree = "<group>"; };
+		2AC7C25D29D14E4B008DB4FC /* ItemDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDao.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 				2A64A0D529B97A8700BC5893 /* Refeicao.swift */,
 				2A64A0D929B97B1500BC5893 /* Item.swift */,
 				2A9B79EA29CA64F100BF6D50 /* Alerta.swift */,
+				2ABDB49129D148E600571203 /* RefeicaoDao.swift */,
+				2AC7C25D29D14E4B008DB4FC /* ItemDao.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,6 +194,8 @@
 				2A64A0DA29B97B1500BC5893 /* Item.swift in Sources */,
 				2A15C7FF29B5C0B300481227 /* ViewController.swift in Sources */,
 				2A5288C229C6E53D006CE11E /* AdicionarItensViewController.swift in Sources */,
+				2AC7C25E29D14E4B008DB4FC /* ItemDao.swift in Sources */,
+				2ABDB49229D148E600571203 /* RefeicaoDao.swift in Sources */,
 				2A15C7FB29B5C0B300481227 /* AppDelegate.swift in Sources */,
 				2A924C3229BD9D620050A330 /* RefeicoesTableViewController.swift in Sources */,
 				2A15C7FD29B5C0B300481227 /* SceneDelegate.swift in Sources */,
